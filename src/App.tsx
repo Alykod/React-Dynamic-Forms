@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
 import './App.css';
+import Form from './form';
 
 function App() {
+  const [state, setState] = useState<any>({
+    name: '',
+    age: '',
+    phoneNumber: '',
+    email: '',
+    password: ''
+  })
+
+  useEffect(()=> {
+    console.log("state", state)
+  }, [state])
+
+ const handleProps = (value: any, id: string) => {
+    setState({...state, [id]: value})
+ }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+     <Form values={Values}/>
+    </>
   );
 }
 
 export default App;
+
+
+
+const Values = [
+  {id: "name", label: "User Name", min: 2, max: 10},
+  {data: "", id: "number", label: "Phone Number"},
+  {data: "1231242", id: "email", label: "Email Address"},
+  {data: "", id: "password", inputType: "password", label: "Password"}
+]
